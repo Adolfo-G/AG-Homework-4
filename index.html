@@ -7,17 +7,30 @@
 </head>
 
 <body>
+    <p>Timer: <span id="timer-txt">15</span></p>
     <div id="container" class="hide">
         <p id="question">Question</p>
         <div id="answer-btn-list" class="answer-btn-list">
-            <button class="answer-btn1" onclick=compareAnswer(0)>a1</button>
-            <button class="answer-btn2" onclick=compareAnswer(1)>a2</button>
-            <button class="answer-btn3" onclick=compareAnswer(2)>a3</button>
-            <button class="answer-btn4" onclick=compareAnswer(3)>a4</button>
+            <button class="answer-btn1" >a1</button>
+            <button class="answer-btn2" >a2</button>
+            <button class="answer-btn3" >a3</button>
+            <button class="answer-btn4" >a4</button>
         </div>
+    </div>
+    
+    <form id="form" class="hide">
+        <input type="text" id="initial-input" placeholder="Your initials here">
+        <button id="submit">Enter</button>
+    </form>
+    <div id="highscores" class="hide">
+        <ul id="list">
+
+        </ul>
     </div>
     <div class="extra-btns">
         <button id="start-btn">Start Quiz</button>
+        <button id="retry" class="hide">Retake Quiz?</button>
+        <button id="clear-hs" class="hide">Clear Highscores</button>
     </div> 
 
 
