@@ -14,13 +14,11 @@ var timerDisplay=document.querySelector("#timer-txt")
 var scoreInfo=document.querySelector("#highscores")
 var listContent=document.querySelector("#list")
 
-var count=16
+var count=26
 var questionIndex=0
 var correctCount=0
 var userResults=[]
-
 var retrievedData= JSON.parse(localStorage.getItem("userResults"))
-
 
 var questionList=[
     {
@@ -66,18 +64,15 @@ var questionList=[
 }
 ]
 
-retryBtn.addEventListener("click",quizStart)
-clearBtn.addEventListener("click",function(){
-    localStorage.clear()
-})
-startBtn.addEventListener("click",quizStart)
+
 function quizStart(){
+    reset()
     if(retrievedData!=null && retrievedData.length>0){
         for(var i=0;i<retrievedData.length;i++){
             userResults.push(retrievedData[i])
         }
     }
-    count=16
+    
     startBtn.classList.add("hide")
     quizContainer.classList.remove("hide")
     timer()
@@ -93,19 +88,7 @@ function displayQuestion(){
     ansBtn4.textContent=questionList[questionIndex].answers[3].answerChoice
 }
 
-// adding event listeners to answer buttons
-ansBtn1.addEventListener("click",function(){
-    compareAnswer(0)
-})
-ansBtn2.addEventListener("click",function(){
-    compareAnswer(1)
-})
-ansBtn3.addEventListener("click",function(){
-    compareAnswer(2)
-})
-ansBtn4.addEventListener("click",function(){
-    compareAnswer(3)
-})
+
 //checks if answer is correct and determines if next question can be displayed
 function compareAnswer(index){
     if(questionList[questionIndex].answers[index].isRight){
@@ -124,14 +107,15 @@ function compareAnswer(index){
     }
     
 }
-formBtn.addEventListener("click", formPage)//add json stuff here
+
 function formPage(event){
     event.preventDefault()
     
-    userResults.push({
-        UserInitials:formEntry.value.trim(),
-        userScore:count
-        })
+    if(formEntry.value.trim()!=="")
+        userResults.push({
+            UserInitials:formEntry.value.trim(),
+            userScore:count
+            })
     console.log(userResults)
     localStorage.setItem("userResults",JSON.stringify(userResults))
     formEntry.value=""
@@ -159,10 +143,46 @@ function timer(){
     function countdown(){
         count--
         timerDisplay.textContent=count
-        if(count<=0){
+        if(count<=0||questionList.length===questionIndex){
             clearInterval(intervalCount)
             quizContainer.classList.add("hide")
             formBox.classList.remove("hide")
         } 
     }
 }
+
+function reset(){
+    count=26
+    questionIndex=0
+    correctCount=0
+    userResults=[]
+    // if(retryBtn.classList.contains("hide") && clearBtn.classList.contains("hide") && scoreInfo.classList.contains("hide")){
+    retryBtn.classList.add("hide")
+    clearBtn.classList.add("hide")
+    scoreInfo.classList.add("hide")
+    console.log("hello")
+   
+    //}
+}
+
+retryBtn.addEventListener("click",quizStart)
+clearBtn.addEventListener("click",function(){
+    localStorage.clear()
+    while(listContent.firstChild){
+        listContent.removeChild(listContent.firstChild)
+    }
+})
+startBtn.addEventListener("click",quizStart)
+ansBtn1.addEventListener("click",function(){
+    compareAnswer(0)
+})
+ansBtn2.addEventListener("click",function(){
+    compareAnswer(1)
+})
+ansBtn3.addEventListener("click",function(){
+    compareAnswer(2)
+})
+ansBtn4.addEventListener("click",function(){
+    compareAnswer(3)
+})
+formBtn.addEventListener("click", formPage)
