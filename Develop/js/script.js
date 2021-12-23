@@ -14,12 +14,11 @@ var formEntry=document.querySelector("#initial-input")
 var timerDisplay=document.querySelector("#timer-txt")
 var scoreInfo=document.querySelector("#highscores")
 var listContent=document.querySelector("#list")
-
+var retrievedData;
 var count=51
 var questionIndex=0
-var correctCount=0
-var userResults=[]
-var retrievedData= JSON.parse(localStorage.getItem("userResults"))
+var userResults;
+
 
 var questionList=[
     {
@@ -68,13 +67,13 @@ var questionList=[
 
 function quizStart(){
     reset()
+    userResults=[]
+    retrievedData= JSON.parse(localStorage.getItem("userResults"))
     if(retrievedData!=null && retrievedData.length>0){
         for(var i=0;i<retrievedData.length;i++){
             userResults.push(retrievedData[i])
         }
     }
-    console.log(userResults)
-    console.log(retrievedData)
     startBtn.classList.add("hide")
     startText.classList.add("hide")
     quizContainer.classList.remove("hide")
@@ -94,12 +93,8 @@ function displayQuestion(){
 
 //checks if answer is correct and determines if next question can be displayed
 function compareAnswer(index){
-    if(questionList[questionIndex].answers[index].isRight){
-        correctCount++
-        console.log("correct")
-    }else{
-        count-=10
-        console.log("false")
+    if(questionList[questionIndex].answers[index].isRight===false){
+        count-=10 
     }
     questionIndex++
     if(questionIndex<questionList.length){
@@ -108,20 +103,23 @@ function compareAnswer(index){
         quizContainer.classList.add("hide")
         formBox.classList.remove("hide")
     }
-    
 }
 
 function formPage(event){
     event.preventDefault()
     
-    if(formEntry.value.trim()!=="")
+    if(formEntry.value.trim()!==""){
         userResults.push({
             UserInitials:formEntry.value.trim(),
             userScore:count
             })
-    localStorage.setItem("userResults",JSON.stringify(userResults))
-    formEntry.value=""
-    scorePage()
+        localStorage.setItem("userResults",JSON.stringify(userResults))
+        formEntry.value=""
+        scorePage()
+        }else{
+            alert("No input was detected. Please try again.")
+        }
+    
 }
 
 function scorePage(){
@@ -158,12 +156,18 @@ function reset(){
     questionIndex=0
     correctCount=0
     userResults=[]
+    retrievedData=null
     retryBtn.classList.add("hide")
     clearBtn.classList.add("hide")
     scoreInfo.classList.add("hide")
 }
 
-retryBtn.addEventListener("click",quizStart)
+retryBtn.addEventListener("click",function(){
+    while(listContent.firstChild){
+        listContent.removeChild(listContent.firstChild)
+    }
+    quizStart()
+})
 clearBtn.addEventListener("click",function(){
     localStorage.clear()
     while(listContent.firstChild){
@@ -184,3 +188,4 @@ ansBtn4.addEventListener("click",function(){
     compareAnswer(3)
 })
 formBtn.addEventListener("click", formPage)
+
