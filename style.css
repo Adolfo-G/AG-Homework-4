@@ -1,3 +1,84 @@
 .hide{
     display: none;
 }
+
+.btn{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 17px;
+    border-radius: 10px;
+    font-weight: bold;
+    background-color: rgb(21, 150, 255);
+    color: white;
+    padding: 5px 10px 5px 10px;
+}
+body{
+    background-color: rgb(29, 114, 129);
+    /* width: 100%;
+    height: 100%; */
+}
+#test-page{
+    padding: 50px;
+    background-color: white;
+    border-radius: 10px;
+    /* display: flex; */
+    justify-content: center;
+    width: 70%;
+}
+.test-page-container{
+    display: flex;
+    justify-content: center;
+    padding-top: 15%;
+    
+    
+}
+
+.timer{
+    font-size: 23px;
+    background-color: rgb(214, 127, 13);
+    color: white;
+    font-weight: bold;
+    text-align: left;
+    padding: 5px 10px 5px 10px;
+    
+    border-radius: 5px;
+    justify-content: left;
+}
+.timer-container{
+    padding-bottom: 20px;
+}
+
+p{
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 21px;
+}
+
+.answer-btn-list{
+    padding-top: 20px;
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 5px;
+}
+
+li{
+    text-align: left;
+    font-size: 18px;
+    background-color: rgb(246, 231, 255);
+}
+.start-btn-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.extra-btns{
+    display: grid;
+    grid-template-columns: auto auto;
+    gap: 5px;
+    padding-top: 20px;
+}
+
+
+@media only screen and (max-width: 630px) {
+    .answer-btn-list{
+    grid-template-columns: auto;
+    }
+}

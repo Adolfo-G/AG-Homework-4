@@ -3,37 +3,45 @@
 <html lang="en">
 <head>
     <title>Document</title>
+    <link rel="stylesheet" href="reset.css">
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <p>Timer: <span id="timer-txt">25</span></p>
-    <div id="container" class="hide">
-        <p id="question">Question</p>
-        <div id="answer-btn-list" class="answer-btn-list">
-            <button class="answer-btn1" >a1</button>
-            <button class="answer-btn2" >a2</button>
-            <button class="answer-btn3" >a3</button>
-            <button class="answer-btn4" >a4</button>
+    <div class="test-page-container">
+    <div id="test-page">
+        <div id="container" class="hide">
+            <div class="timer-container">
+            <span class="timer">Timer: <span id="timer-txt">50</span></span>
+            </div>
+            <p id="question">Question</p>
+            <div id="answer-btn-list" class="answer-btn-list">
+                <button class="answer-btn1 btn" >a1</button>
+                <button class="answer-btn2 btn" >a2</button>
+                <button class="answer-btn3 btn" >a3</button>
+                <button class="answer-btn4 btn" >a4</button> 
+            </div>
         </div>
+        
+        <form id="form" class="hide">
+            <input type="text" id="initial-input" placeholder="Your initials here">
+            <button id="submit" class="btn">Enter</button>
+        </form>
+        <div id="highscores" class="hide">
+            <ul id="list">
+
+            </ul>
+        </div>
+        <div class="start-btn-container">
+            <p class="start-text">This is a timed quiz containing questions on basic JavaScript concepts. You will have 50 seconds to start and every wrong answer will deduct 10 seconds. Press start quiz when ready.</p>
+            <button id="start-btn" class="btn">Start Quiz</button>
+        <div class="extra-btns">    
+            <button id="retry" class="hide btn">Retake Quiz?</button>
+            <button id="clear-hs" class="hide btn">Clear Highscores</button>
+        </div>
+        </div> 
     </div>
-    
-    <form id="form" class="hide">
-        <input type="text" id="initial-input" placeholder="Your initials here">
-        <button id="submit">Enter</button>
-    </form>
-    <div id="highscores" class="hide">
-        <ul id="list">
-
-        </ul>
     </div>
-    <div class="extra-btns">
-        <button id="start-btn">Start Quiz</button>
-        <button id="retry" class="hide">Retake Quiz?</button>
-        <button id="clear-hs" class="hide">Clear Highscores</button>
-    </div> 
-
-
 
 
     <script src="script.js"></script>

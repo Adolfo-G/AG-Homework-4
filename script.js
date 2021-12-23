@@ -1,4 +1,5 @@
 var startBtn= document.querySelector("#start-btn")
+var startText=document.querySelector(".start-text")
 var questionText=document.querySelector("#question")
 var ansBtn1=document.querySelector(".answer-btn1")
 var ansBtn2=document.querySelector(".answer-btn2")
@@ -14,7 +15,7 @@ var timerDisplay=document.querySelector("#timer-txt")
 var scoreInfo=document.querySelector("#highscores")
 var listContent=document.querySelector("#list")
 
-var count=26
+var count=51
 var questionIndex=0
 var correctCount=0
 var userResults=[]
@@ -22,7 +23,7 @@ var retrievedData= JSON.parse(localStorage.getItem("userResults"))
 
 var questionList=[
     {
-        question:"Which of the following is an example of a function?",
+        question:"Which of the following is an example of a function call?",
         answers:[
             {answerChoice:"example()",isRight:true},
             {answerChoice:"#example",isRight:false},
@@ -38,7 +39,7 @@ var questionList=[
         {answerChoice:"getElementByClass('h1')",isRight:false}
     ]
 },{
-    question:"For the array ['apple','bananna','peach','pear'], \n What index position is peach in?",
+    question:"For the array ['apple','bananna','peach','pear'], \n What index position is 'peach' in?",
     answers:[
         {answerChoice:"0",isRight:false},
         {answerChoice:"1",isRight:false},
@@ -46,7 +47,7 @@ var questionList=[
         {answerChoice:"3",isRight:false}
     ]
 },{
-    question:"Which of the following evaluate to true?",
+    question:"Which of the following will evaluate to true?",
     answers:[
         {answerChoice:"'10'===10",isRight:false},
         {answerChoice:"7!=7",isRight:false},
@@ -72,8 +73,10 @@ function quizStart(){
             userResults.push(retrievedData[i])
         }
     }
-    
+    console.log(userResults)
+    console.log(retrievedData)
     startBtn.classList.add("hide")
+    startText.classList.add("hide")
     quizContainer.classList.remove("hide")
     timer()
     displayQuestion()
@@ -95,7 +98,7 @@ function compareAnswer(index){
         correctCount++
         console.log("correct")
     }else{
-        count-=3
+        count-=10
         console.log("false")
     }
     questionIndex++
@@ -116,7 +119,6 @@ function formPage(event){
             UserInitials:formEntry.value.trim(),
             userScore:count
             })
-    console.log(userResults)
     localStorage.setItem("userResults",JSON.stringify(userResults))
     formEntry.value=""
     scorePage()
@@ -131,7 +133,7 @@ function scorePage(){
     // for loop to make lists with content being indexes from userResults
     for(var i = 0;i<userResults.length;i++){
         var li=document.createElement("li")
-        li.textContent=userResults[i].UserInitials+"~"+userResults[i].userScore
+        li.textContent="User:"+userResults[i].UserInitials+"  Score:"+userResults[i].userScore
         listContent.appendChild(li)
     }
 
@@ -152,17 +154,13 @@ function timer(){
 }
 
 function reset(){
-    count=26
+    count=51
     questionIndex=0
     correctCount=0
     userResults=[]
-    // if(retryBtn.classList.contains("hide") && clearBtn.classList.contains("hide") && scoreInfo.classList.contains("hide")){
     retryBtn.classList.add("hide")
     clearBtn.classList.add("hide")
     scoreInfo.classList.add("hide")
-    console.log("hello")
-   
-    //}
 }
 
 retryBtn.addEventListener("click",quizStart)
