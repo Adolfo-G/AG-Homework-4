@@ -64,7 +64,7 @@ var questionList=[
 }
 ]
 
-
+//starts the quiz and pulls local storage data, starts the timer and displays the questions 
 function quizStart(){
     reset()
     userResults=[]
@@ -81,7 +81,7 @@ function quizStart(){
     displayQuestion()
     
 }
-
+//assign buttons answers from the question list
 function displayQuestion(){
     questionText.textContent=questionList[questionIndex].question
     ansBtn1.textContent=questionList[questionIndex].answers[0].answerChoice
@@ -91,7 +91,7 @@ function displayQuestion(){
 }
 
 
-//checks if answer is correct and determines if next question can be displayed
+//checks if answer is correct and determines if next question can be displayed, increases question index to ready next set of questions
 function compareAnswer(index){
     if(questionList[questionIndex].answers[index].isRight===false){
         count-=10 
@@ -105,9 +105,9 @@ function compareAnswer(index){
     }
 }
 
+// enters user input and sends it to local storage, also calls the score page
 function formPage(event){
     event.preventDefault()
-    
     if(formEntry.value.trim()!==""){
         userResults.push({
             UserInitials:formEntry.value.trim(),
@@ -121,7 +121,7 @@ function formPage(event){
         }
     
 }
-
+// display last page
 function scorePage(){
     formBox.classList.add("hide")
     retryBtn.classList.remove("hide")
@@ -137,7 +137,7 @@ function scorePage(){
 
 }
 
-
+//countdown timer
 function timer(){
     var intervalCount=setInterval(countdown,1000)
     function countdown(){
@@ -161,20 +161,23 @@ function reset(){
     clearBtn.classList.add("hide")
     scoreInfo.classList.add("hide")
 }
-
+//retry and remove all child li created
 retryBtn.addEventListener("click",function(){
     while(listContent.firstChild){
         listContent.removeChild(listContent.firstChild)
     }
     quizStart()
 })
+// clear local storage and remove all child li created
 clearBtn.addEventListener("click",function(){
     localStorage.clear()
     while(listContent.firstChild){
         listContent.removeChild(listContent.firstChild)
     }
 })
+//starts the quiz
 startBtn.addEventListener("click",quizStart)
+//quiz answer buttons passing their index value to be assigned an answer prompt
 ansBtn1.addEventListener("click",function(){
     compareAnswer(0)
 })
@@ -187,5 +190,7 @@ ansBtn3.addEventListener("click",function(){
 ansBtn4.addEventListener("click",function(){
     compareAnswer(3)
 })
+
+// form submit button that leads to score page
 formBtn.addEventListener("click", formPage)
 

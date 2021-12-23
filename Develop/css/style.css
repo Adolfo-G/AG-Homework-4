@@ -11,6 +11,9 @@
     color: white;
     padding: 5px 10px 5px 10px;
 }
+.btn:hover{
+    cursor: pointer;
+}
 body{
     background-color: rgb(29, 114, 129);
     /* width: 100%;
@@ -70,6 +73,7 @@ li{
     justify-content: center;
 }
 .start-text{
+    font-family:Arial, Helvetica, sans-serif;
     padding-bottom:50px;
 }
 .extra-btns{
